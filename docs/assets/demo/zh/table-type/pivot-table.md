@@ -3,22 +3,23 @@ category: examples
 group: table-type
 title: 透视表格
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/VTable/preview/pivot-table.png
+order: 1-5
 link: '../guide/table_type/Pivot_table/pivot_table_useage'
 option: PivotTable#columnTree
 ---
 
-# 透视表格（自定义表头结构）
+# 透视表格
 
-透视表格，该示例传入了自定义表头树结构rowTree和columnTree
+透视表格
 
 ## 关键配置
 
-- `PivotTable` 表格类型
-- `columnTree` 自定义表头树结构
-- `rowTree` 自定义表头树结构
+- `PivotTable`
+- `columnTree`
+- `rowTree`
 - `columns` 可选 配置维度的样式等
-- `rows` 可选 配置维度的样式等
-- `indicators` 指标配置
+- `rows`可选 配置维度的样式等
+- `indicators`
 ## 代码演示
 
 ```javascript livedemo template=vtable
@@ -308,7 +309,7 @@ const option = {
                     "headerStyle":{
                       fontWeight: "normal",
                     },
-                     "format":(value)=>{return '$'+Number(value).toFixed(2)},
+                     "format":(rec)=>{return '$'+Number(rec['Quantity']).toFixed(2)},
                      style:{
                       padding:[16,28,16,28],
                       color(args){
@@ -326,7 +327,7 @@ const option = {
                     "headerStyle":{
                       fontWeight: "normal",
                     },
-                    "format":(value)=>{return '$'+Number(value).toFixed(2)},
+                    "format":(rec)=>{return '$'+Number(rec?.['Sales']).toFixed(2)},
                     style:{
                       padding:[16,28,16,28],
                       color(args){
@@ -344,7 +345,7 @@ const option = {
                     "headerStyle":{
                       fontWeight: "normal",
                     },
-                    "format":(value)=>{return '$'+Number(value).toFixed(2)},
+                    "format":(rec)=>{return '$'+Number(rec['Profit']).toFixed(2)},
                     style:{
                       padding:[16,28,16,28],
                       color(args){

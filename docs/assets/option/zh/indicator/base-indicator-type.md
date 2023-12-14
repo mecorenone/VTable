@@ -12,16 +12,16 @@ ${prefix} title(string)
 ${prefix} format(FieldFormat)
 
 指标值格式化
-```
-type FieldFormat = (value: number|string, col:number, row:number, table:PivotTable) => any;
-  ```
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} headerFormat(FieldFormat)
 
-指标名称的format
-```
-type FieldFormat = (title: number|string, col:number, row:number, table:PivotTable) => any;
-  ```
+维度值的format
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} width(number|string)
 

@@ -24,7 +24,7 @@ import { PIVOT_TABLE_EVENT_TYPE } from './ts-types/pivot-table/PIVOT_TABLE_EVENT
 import { cellInRange, emptyFn } from './tools/helper';
 import { Dataset } from './dataset/dataset';
 import { BaseTable } from './core/BaseTable';
-import type { BaseTableAPI, PivotTableProtected } from './ts-types/base-table';
+import type { PivotTableProtected } from './ts-types/base-table';
 import { Title } from './components/title/title';
 import { cloneDeep } from '@visactor/vutils';
 import { Env } from './tools/env';
@@ -85,9 +85,6 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
     this.internalProps.dataConfig = cloneDeep(options.dataConfig);
 
     this.internalProps.enableDataAnalysis = options.enableDataAnalysis;
-    if (!options.rowTree && !options.columnTree) {
-      this.internalProps.enableDataAnalysis = true;
-    }
     const records = this.internalProps.records;
     if (this.internalProps.enableDataAnalysis && (options.rows || options.columns)) {
       const rowKeys =
@@ -227,9 +224,7 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
     internalProps.columnResizeType = options.columnResizeType ?? 'column';
     internalProps.dataConfig = cloneDeep(options.dataConfig);
     internalProps.enableDataAnalysis = options.enableDataAnalysis;
-    if (!options.rowTree && !options.columnTree) {
-      internalProps.enableDataAnalysis = true;
-    }
+
     //维护tree树形结构的展开状态
     if (
       options?.rowHierarchyType === 'tree' &&
@@ -488,7 +483,7 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
     }
     if (this.internalProps.layoutMap.isHeader(col, row)) {
       const { title, fieldFormat } = this.internalProps.layoutMap.getHeader(col, row);
-      return typeof fieldFormat === 'function' ? fieldFormat(title, col, row, this as BaseTableAPI) : title;
+      return typeof fieldFormat === 'function' ? fieldFormat(title) : title;
     }
     if (this.dataset) {
       const cellDimensionPath = this.internalProps.layoutMap.getCellHeaderPaths(col, row);
@@ -503,7 +498,7 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
         this.internalProps.layoutMap.indicatorsAsCol ? colKeys.slice(0, -1) : colKeys,
         (this.internalProps.layoutMap as PivotHeaderLayoutMap).getIndicatorKey(col, row)
       );
-      return aggregator.formatValue ? aggregator.formatValue(col, row, this as BaseTableAPI) : '';
+      return aggregator.formatValue ? aggregator.formatValue(col, row, this) : '';
     } else if (this.flatDataToObjects) {
       //数据为行列树结构 根据row col获取对应的维度名称 查找到对应值
       const cellDimensionPath = this.internalProps.layoutMap.getCellHeaderPaths(col, row);
@@ -520,16 +515,17 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
       );
       const { fieldFormat } = this.internalProps.layoutMap.getBody(col, row);
       return typeof fieldFormat === 'function'
-        ? fieldFormat(valueNode?.value, col, row, this as BaseTableAPI)
+        ? fieldFormat(valueNode?.record, col, row, this)
         : valueNode?.value ?? '';
     }
     const { fieldFormat } = this.internalProps.layoutMap.getBody(col, row);
     const rowIndex = this.getBodyIndexByRow(row);
     const colIndex = this.getBodyIndexByCol(col);
     const dataValue = this.records[rowIndex]?.[colIndex];
-    // const cellHeaderPaths = this.internalProps.layoutMap.getCellHeaderPaths(col, row);
+    const cellHeaderPaths = this.internalProps.layoutMap.getCellHeaderPaths(col, row);
+
     if (typeof fieldFormat === 'function') {
-      const fieldResult = fieldFormat(dataValue, col, row, this as BaseTableAPI);
+      const fieldResult = fieldFormat({ dataValue, ...cellHeaderPaths }, col, row, this);
       return fieldResult;
     }
     return dataValue;
@@ -951,10 +947,6 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
       this.scenegraph.resize();
     }
     this.eventManager.updateEventBinder();
-  }
-  /** 结束编辑 */
-  completeEditCell() {
-    this.editorManager.completeEdit();
   }
   /** 获取单元格对应的编辑器 */
   getEditor(col: number, row: number) {

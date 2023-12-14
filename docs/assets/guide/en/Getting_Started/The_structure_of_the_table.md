@@ -67,8 +67,8 @@ The settings of the pivot table are mainly concentrated on the indicators config
             indicatorKey: 'sales',
             title: '销售额',
             cellType: 'progressbar',
-            format(value) {
-              return `${value}%`;
+            format(rec) {
+              return `${rec["sales"]}%`;
             },
             style: {
               barHeight: '100%',

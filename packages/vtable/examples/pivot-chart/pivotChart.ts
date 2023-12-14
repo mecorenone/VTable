@@ -137,22 +137,6 @@ export function createTable() {
               opacity: 0.2
             }
           }
-        },
-        theme: {
-          // axis: {
-          //   label: {
-          //     style: {
-          //       fill: 'green'
-          //     }
-          //   }
-          // }
-          colorScheme: {
-            default: {
-              palette: {
-                axisLabelFontColor: 'red'
-              }
-            }
-          }
         }
       }
     },
@@ -301,22 +285,6 @@ export function createTable() {
             },
             selected_reverse: {
               opacity: 0.2
-            }
-          }
-        },
-        theme: {
-          // axis: {
-          //   label: {
-          //     style: {
-          //       fill: 'green'
-          //     }
-          //   }
-          // }
-          colorScheme: {
-            default: {
-              palette: {
-                axisLabelFontColor: 'red'
-              }
             }
           }
         }

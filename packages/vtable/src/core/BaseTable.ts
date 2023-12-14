@@ -3017,9 +3017,6 @@ export abstract class BaseTable extends EventTarget implements BaseTableAPI {
         return false;
       }
       const define = this.getHeaderDefine(col, row);
-      if (!define) {
-        return false;
-      }
       if (define.dragHeader === undefined) {
         if (this.internalProps.dragHeaderMode === 'all') {
           return true;

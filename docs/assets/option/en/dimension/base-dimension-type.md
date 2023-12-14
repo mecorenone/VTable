@@ -11,9 +11,9 @@ ${prefix} title(string)
 ${prefix} headerFormat(FieldFormat)
 
 Format of the dimension value
-```
-type FieldFormat = (title: number|string, col:number, row:number, table:PivotTable) => any;
-  ```
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} width(number|string)
 

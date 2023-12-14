@@ -24,7 +24,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         return;
       }
       // range for top axis
-      const { range, ticks, axisOption, isZeroAlign, theme } = axisRange;
+      const { range, ticks, axisOption, isZeroAlign } = axisRange;
 
       if (isZeroAlign) {
         // range for bottom axis
@@ -76,8 +76,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
           label: {
             flush: true
           },
-          __ticksForVTable: ticks,
-          __vtableChartTheme: theme
+          __ticksForVTable: ticks
         }
       );
     } else if (
@@ -99,7 +98,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         return;
       }
       // range for bottom axis
-      const { range, ticks, axisOption, isZeroAlign, theme } = axisRange;
+      const { range, ticks, axisOption, isZeroAlign } = axisRange;
 
       if (isZeroAlign) {
         // range for top axis
@@ -146,8 +145,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
           label: {
             flush: true
           },
-          __ticksForVTable: ticks,
-          __vtableChartTheme: theme
+          __ticksForVTable: ticks
         }
       );
     } else if (
@@ -164,7 +162,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
       const rowPath = layout.getRowKeysPath(col, row);
       const domain = (data[rowPath ?? ''] as Array<string>) ?? [];
 
-      const { axisOption, isPercent, theme } = getAxisOption(col + 1, row, 'left', layout);
+      const { axisOption, isPercent } = getAxisOption(col + 1, row, 'left', layout);
       if (axisOption?.visible === false) {
         return;
       }
@@ -179,8 +177,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         axisOption,
         {
           orient: 'left',
-          type: 'band',
-          __vtableChartTheme: theme
+          type: 'band'
         }
       );
     }
@@ -204,7 +201,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         return;
       }
       // range for left axis
-      const { range, ticks, axisOption, isZeroAlign, theme } = axisRange;
+      const { range, ticks, axisOption, isZeroAlign } = axisRange;
 
       if (isZeroAlign) {
         // range for right axis
@@ -251,8 +248,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
           label: {
             flush: true
           },
-          __ticksForVTable: ticks,
-          __vtableChartTheme: theme
+          __ticksForVTable: ticks
         }
       );
     } else if (
@@ -265,7 +261,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         return;
       }
       // range for right axis
-      const { range, ticks, axisOption, isZeroAlign, theme } = axisRange;
+      const { range, ticks, axisOption, isZeroAlign } = axisRange;
 
       if (isZeroAlign) {
         // range for left axis
@@ -310,8 +306,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
           label: {
             flush: true
           },
-          __ticksForVTable: ticks,
-          __vtableChartTheme: theme
+          __ticksForVTable: ticks
         }
       );
     } else if (
@@ -330,7 +325,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
       const colPath = layout.getColKeysPath(col, row);
       const domain = (data?.[colPath ?? ''] as Array<string>) ?? [];
 
-      const { axisOption, isPercent, theme } = getAxisOption(col, row - 1, 'bottom', layout);
+      const { axisOption, isPercent } = getAxisOption(col, row - 1, 'bottom', layout);
       if (axisOption?.visible === false) {
         return;
       }
@@ -342,8 +337,7 @@ export function getAxisConfigInPivotChart(col: number, row: number, layout: Pivo
         axisOption,
         {
           orient: 'bottom',
-          type: 'band',
-          __vtableChartTheme: theme
+          type: 'band'
         }
       );
     }
@@ -372,8 +366,7 @@ export function getAxisOption(col: number, row: number, orient: string, layout: 
         axisOption,
         isPercent: spec.percent,
         isZeroAlign: checkZeroAlign(spec, orient, layout),
-        seriesIndice,
-        theme: spec.theme
+        seriesIndice
       };
     }
   }
@@ -383,8 +376,7 @@ export function getAxisOption(col: number, row: number, orient: string, layout: 
   return {
     axisOption,
     isPercent: false,
-    isZeroAlign: checkZeroAlign(spec, orient, layout),
-    theme: spec.theme
+    isZeroAlign: checkZeroAlign(spec, orient, layout)
   };
 }
 
@@ -492,7 +484,7 @@ function getRange(
   defaultSeriesIndice: number,
   layout: PivotHeaderLayoutMap
 ) {
-  const { axisOption, isPercent, isZeroAlign, seriesIndice, theme } = getAxisOption(
+  const { axisOption, isPercent, isZeroAlign, seriesIndice } = getAxisOption(
     colForAxisOption,
     rowForAxisOption,
     position,
@@ -551,8 +543,7 @@ function getRange(
     axisOption,
     isZeroAlign,
     range,
-    ticks,
-    theme
+    ticks
   };
 }
 

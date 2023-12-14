@@ -3,11 +3,12 @@ category: examples
 group: table-type
 title: Pivot Table Tree
 cover: https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/VTable/preview/pivot-tree.png
+order: 1-5
 link: '../guide/table_type/Pivot_table/pivot_table_tree'
 option: PivotTable#rowHierarchyType('grid'%20%7C%20'tree')
 ---
 
-# Pivot Table Tree Hierarchy(custom header tree)
+# Pivot Table Tree Hierarchy
 
 Pivot table tree display, this example passes in the custom header tree structure rowTree and columnTree, and sets rowHierarchyType to tree.
 
@@ -214,9 +215,9 @@ const option = {
                     "headerStyle":{
                       fontWeight: "normal",
                     },
-                    "format":(value)=>{
-                      if(value)
-                      return '$'+Number(value).toFixed(2);
+                    "format":(rec)=>{
+                      if(rec)
+                      return '$'+Number(rec['Sales']).toFixed(2);
                       return '';
                     },
                     style:{
@@ -236,9 +237,8 @@ const option = {
                     "headerStyle":{
                       fontWeight: "normal",
                     },
-                    "format":(value)=>{
-                      if(value)
-                      return '$'+Number(value).toFixed(2);
+                    "format":(rec)=>{if(rec)
+                      return '$'+Number(rec['Profit']).toFixed(2);
                       return '';},
                     style:{
                       padding:[16,28,16,28],

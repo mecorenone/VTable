@@ -12,16 +12,16 @@ Indicator name
 ${prefix} format(FieldFormat)
 
 Indicator value formatting
-```
-type FieldFormat = (value: number|string, col:number, row:number, table:PivotTable) => any;
-  ```
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} headerFormat(FieldFormat)
 
-indicator title format
-```
-type FieldFormat = (title: number|string, col:number, row:number, table:PivotTable) => any;
-  ```
+Dimension value format
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} width(number|string)
 

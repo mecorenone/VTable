@@ -505,9 +505,7 @@ export function dealHeaderForTreeMode(
 
       headerCustomRender: dimensionInfo?.headerCustomRender,
       headerCustomLayout: dimensionInfo?.headerCustomLayout,
-      dragHeader: dimensionInfo?.dragHeader,
-      disableHeaderHover: !!dimensionInfo?.disableHeaderHover,
-      disableHeaderSelect: !!dimensionInfo?.disableHeaderSelect
+      dragHeader: dimensionInfo?.dragHeader
     }), //这里不能新建对象，要用hd保持引用关系
     fieldFormat: dimensionInfo?.headerFormat,
     // iconPositionList:[]

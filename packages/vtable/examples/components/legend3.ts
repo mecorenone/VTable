@@ -195,8 +195,8 @@ export function createTable() {
         indicatorKey: '220922103859011',
         width: 200,
         showSort: false,
-        format(value) {
-          return Math.round(value);
+        format(rec) {
+          return Math.round(rec['220922103859011']);
         },
         style: {
           color: 'white',

@@ -1,11 +1,6 @@
 import type { IEventTarget } from '@visactor/vrender';
 import { Gesture, type FederatedPointerEvent } from '@visactor/vrender';
-import type {
-  ListTableAPI,
-  MousePointerCellEvent,
-  MousePointerMultiCellEvent,
-  MousePointerSparklineEvent
-} from '../../ts-types';
+import type { MousePointerCellEvent, MousePointerMultiCellEvent, MousePointerSparklineEvent } from '../../ts-types';
 import { InteractionState } from '../../ts-types';
 import type { SceneEvent } from '../util';
 import { getCellEventArgsSet } from '../util';
@@ -324,9 +319,6 @@ export function bindTableGroupListener(eventManager: EventManager) {
           table.fireListeners(TABLE_EVENT_TYPE.DRAG_SELECT_END, cellsEvent);
         }
       }
-    }
-    if ((table as ListTableAPI).editorManager) {
-      (table as ListTableAPI).editorManager.completeEdit();
     }
     stateManager.updateInteractionState(InteractionState.default);
     eventManager.dealTableHover();

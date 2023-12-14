@@ -298,11 +298,13 @@ function updateCellWidth(
     const cellStyle = scene.table._getCellStyle(col, row);
     const padding = getQuadProps(getProp('padding', cellStyle, col, row, scene.table));
     if (axisConfig) {
+      const spec = scene.table.internalProps.layoutMap.getRawChartSpec(col, row);
       const axis = new CartesianAxis(
         axisConfig,
         cellGroup.attribute.width,
         cellGroup.attribute.height,
         padding,
+        spec?.theme,
         scene.table
       );
       cellGroup.clear();
@@ -334,8 +336,6 @@ function updateCellWidth(
 
       if (customLayout || customRender) {
         // const { autoRowHeight } = table.internalProps;
-        const style = scene.table._getCellStyle(col, row) as ProgressBarStyle;
-        const padding = getQuadProps(getProp('padding', style, col, row, scene.table));
         const customResult = dealWithCustom(
           customLayout,
           customRender,
@@ -345,7 +345,6 @@ function updateCellWidth(
           cellGroup.attribute.height,
           false,
           scene.table.heightMode === 'autoHeight',
-          padding,
           scene.table
         );
         customElementsGroup = customResult.elementsGroup;

@@ -12,9 +12,9 @@ ${prefix} title(string)
 ${prefix} headerFormat(FieldFormat)
 
 维度值的format
-```
-type FieldFormat = (title: string, col:number, row:number,table: PivotTable) => any;
-```
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} width(number|string)
 

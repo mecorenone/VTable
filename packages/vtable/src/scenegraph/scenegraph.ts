@@ -139,7 +139,7 @@ export class Scenegraph {
   clear: boolean;
 
   mergeMap: MergeMap;
-  _dealAutoFillHeightOriginRowsHeight: number; // hack 缓存一个值 用于处理autoFillHeight的逻辑判断 在某些情况下是需要更新此值的 如增删数据 但目前没有做这个
+
   constructor(table: BaseTableAPI) {
     this.table = table;
     this.hasFrozen = false;
@@ -794,7 +794,7 @@ export class Scenegraph {
       }
     }
 
-    if (this.table.heightMode === 'adaptive') {
+    if (this.table.heightMode === 'adaptive' || this.table.autoFillHeight) {
       // perf to be optimized:
       // reason to use recalculateRowHeights();
       // 1. error amplification（误差放大） in dealHeightMode when multiple resize
@@ -802,8 +802,6 @@ export class Scenegraph {
       // will cause scale error in dealHeightMode()
       this.recalculateRowHeights();
       // this.dealHeightMode();
-    } else if (this.table.autoFillHeight) {
-      this.dealHeightMode();
     }
 
     // this.dealWidthMode();
@@ -1207,11 +1205,9 @@ export class Scenegraph {
 
         actualHeight += rowHeight;
       }
+
       // 如果内容高度小于canvas高度，执行adaptive放大
-      if (
-        (this._dealAutoFillHeightOriginRowsHeight ?? actualHeight) < canvasHeight &&
-        actualHeight - actualHeaderHeight > 0
-      ) {
+      if (actualHeight < canvasHeight && actualHeight - actualHeaderHeight > 0) {
         const factor = (canvasHeight - actualHeaderHeight) / (actualHeight - actualHeaderHeight);
         for (let row = table.frozenRowCount; row < table.rowCount - table.bottomFrozenRowCount; row++) {
           // this.setRowHeight(row, table.getRowHeight(row) * factor);

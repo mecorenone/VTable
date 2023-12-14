@@ -42,11 +42,6 @@ export function createTable() {
       frameStyle: {
         borderColor: '#00ffff',
         borderLineWidth: 2
-      },
-      hover: {
-        cellBgColor: '#0000FF',
-        inlineRowBgColor: '#0000FF',
-        inlineColumnBgColor: '#0000FF'
       }
     },
     selectionStyle: {
@@ -59,11 +54,6 @@ export function createTable() {
       frameStyle: {
         borderColor: '#ff00ff',
         borderLineWidth: 2
-      },
-      hover: {
-        cellBgColor: '#0000FF',
-        inlineRowBgColor: '#0000FF',
-        inlineColumnBgColor: '#0000FF'
       }
     },
     cornerHeaderStyle: {
@@ -78,8 +68,8 @@ export function createTable() {
     bodyStyle: {
       hover: {
         cellBgColor: '#CCE0FF',
-        inlineRowBgColor: '#CCE0FF',
-        inlineColumnBgColor: '#CCE0FF'
+        inlineRowBgColor: '#F3F8FF',
+        inlineColumnBgColor: '#F3F8FF'
       },
       frameStyle: {
         borderColor: '#ffff00',
@@ -117,8 +107,7 @@ export function createTable() {
       title: true,
       headerStyle: {
         textStick: true
-      },
-      disableHeaderHover: true
+      }
     },
     columns: [
       {
@@ -131,7 +120,6 @@ export function createTable() {
           return args.value;
         },
         cornerDescription: '地区维度',
-        // disableHeaderHover: true,
         headerStyle: {
           textAlign: 'center',
           borderColor: 'blue',
@@ -214,8 +202,8 @@ export function createTable() {
       {
         indicatorKey: '1',
         title: '销售额',
-        format(value) {
-          return `${value}%`;
+        format(rec) {
+          return `${rec.dataValue}%`;
         },
         headerStyle: {
           color: 'red',
@@ -247,10 +235,9 @@ export function createTable() {
       {
         indicatorKey: '2',
         title: '利润',
-        disableHover: true,
-        format(value) {
+        format(rec) {
           // if (rec.rowDimensions[0].value === '东北') return `${rec.dataValue}%`;
-          return value;
+          return rec.dataValue;
         },
         cellType: 'progressbar',
         style: {
@@ -481,8 +468,7 @@ export function createTable() {
         fontStyle: 'bold',
         fontFamily: 'sans-serif'
         // lineHeight: '20px'
-      },
-      disableHeaderHover: true
+      }
     },
     indicatorTitle: '指标名称',
     // indicatorsAsCol: false,
@@ -496,9 +482,6 @@ export function createTable() {
     columnResizeType: 'indicator', // 'column' | 'indicator' | 'all'
     tooltip: {
       isShowOverflowTextTooltip: true
-    },
-    hover: {
-      highlightMode: 'cross'
     }
   };
 

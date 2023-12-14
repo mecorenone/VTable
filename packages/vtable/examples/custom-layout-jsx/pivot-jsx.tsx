@@ -424,10 +424,10 @@ const option: VTable.PivotTableConstructorOptions = {
       indicatorKey: '220524114340013',
       caption: '销售额',
       width: 'auto',
-      format(value) {
+      format(record) {
         // if (rec.rowDimensions[0].value === '东北') return `${rec.dataValue}%`;
-        if (!value) return '--';
-        return Math.floor(parseFloat(value));
+        if (!record?.['220524114340013']) return '--';
+        return Math.floor(parseFloat(record?.['220524114340013']));
       },
       headerStyle: {
         // color: 'red',
@@ -456,10 +456,10 @@ const option: VTable.PivotTableConstructorOptions = {
     {
       indicatorKey: '220524114340014',
       caption: '利润',
-      format(value) {
+      format(record) {
         // if (rec.rowDimensions[0].value === '东北') return `${rec.dataValue}%`;
-        if (!value) return '--';
-        return Math.floor(parseFloat(value));
+        if (!record?.['220524114340014']) return '--';
+        return Math.floor(parseFloat(record?.['220524114340014']));
       },
       width: 'auto',
       headerStyle: {

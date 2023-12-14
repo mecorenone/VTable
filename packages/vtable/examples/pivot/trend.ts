@@ -255,9 +255,9 @@ export function createTable() {
         indicatorKey: 'ratio',
         title: '环比',
         width: 'auto',
-        format: value => {
-          if (value) {
-            return value * 100 + '%';
+        format: rec => {
+          if (rec?.ratio) {
+            return rec?.ratio * 100 + '%';
           }
           return '-';
         },

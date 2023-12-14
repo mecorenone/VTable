@@ -369,7 +369,7 @@ const option = {
                 return 'gray';
               }
             },
-            "format":(value)=>{return '$'+Number(value).toFixed(2)},
+            "format":(rec)=>{return '$'+Number(rec['Quantity']).toFixed(2)},
           },
           {
             "indicatorKey": "Sales",
@@ -411,9 +411,9 @@ const option = {
                 return 'gray';
               }
             },
-             "format":(value)=>{
-               if(value)
-                      return '$'+Number(value).toFixed(2);
+             "format":(rec)=>{
+               if(rec)
+                      return '$'+Number(rec['Sales']).toFixed(2);
                       else return '--';
              },
           },
@@ -459,7 +459,7 @@ const option = {
                 return 'gray';
               }
             },
-             "format":(value)=>{return '$'+Number(value).toFixed(2)},
+             "format":(rec)=>{return '$'+Number(rec['Profit']).toFixed(2)},
           }
         ],
         "corner": {

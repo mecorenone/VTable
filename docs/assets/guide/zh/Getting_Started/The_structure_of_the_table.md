@@ -67,8 +67,8 @@ body数据单元格是表格最主要的显示数据的部分，展示了表格�
             indicatorKey: 'sales',
             title: '销售额',
             cellType: 'progressbar',
-            format(value) {
-              return `${value}%`;
+            format(rec) {
+              return `${rec["sales"]}%`;
             },
             style: {
               barHeight: '100%',

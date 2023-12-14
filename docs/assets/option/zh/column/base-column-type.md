@@ -11,10 +11,9 @@ ${prefix} field(string)
 ${prefix} fieldFormat(FieldFormat)
 
 配置数据格式化
-
-```
-type FieldFormat = (record: any) => any;
-```
+{{ use: common-field-format(
+  prefix = ${prefix}
+  ) }}
 
 ${prefix} width(number|string)
 

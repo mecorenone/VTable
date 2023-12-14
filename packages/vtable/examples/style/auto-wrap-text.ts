@@ -311,8 +311,8 @@ export function createTable() {
       {
         indicatorKey: '1',
         title: '销售额',
-        format(value) {
-          return `${value}%`;
+        format(rec) {
+          return `${rec.dataValue}%`;
         },
         width: 55,
         headerStyle: {
@@ -344,9 +344,9 @@ export function createTable() {
       {
         indicatorKey: '2',
         title: '利润',
-        format(value) {
+        format(rec) {
           // if (rec.rowDimensions[0].value === '东北') return `${rec.dataValue}%`;
-          return value;
+          return rec.dataValue;
         },
         cellType: 'progressbar',
         // headerStyle: {
